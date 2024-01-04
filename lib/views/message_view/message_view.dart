@@ -4,18 +4,44 @@ import 'package:stacked/stacked.dart';
 
 class MessageView extends StatelessWidget {
   final String id;
-  MessageView({super.key, required this.id});
+  final String title;
+  final String body;
+  final String imageurl;
+  final List<Map<String, dynamic>>? notificationData;
+
+  MessageView({Key? key, required this.id, this.notificationData, required this.title, required this.body, required this.imageurl});
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
-        viewModelBuilder: () => MessageViewModel(),
-        builder: (context, viewModel, child) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("Notification ID" + id),
+    print(notificationData);
+    return ViewModelBuilder<MessageViewModel>.nonReactive(
+      viewModelBuilder: () => MessageViewModel(),
+      builder: (context, viewModel, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("Notification ID: $id"),
+          ),
+          body: Center(
+            child: Center(
+        child: Column(
+          children: [
+            Card(
+              margin: EdgeInsets.all(10),
+              child: ListTile(
+                title: Text(title),
+                subtitle: Text(body),
+                leading: imageurl.isNotEmpty
+                    ? Image.network(imageurl)
+                    : null,
+                // Customize the display of other fields as needed
+              ),
             ),
-          );
-        });
+          ],
+        ),
+      ),
+          ),
+        );
+      },
+    );
   }
 }

@@ -48,7 +48,13 @@ class StackedRouter extends _i1.RouterBase {
     _i3.MessageView: (data) {
       final args = data.getArgs<MessageViewArguments>(nullOk: false);
       return _i4.MaterialPageRoute<dynamic>(
-        builder: (context) => _i3.MessageView(key: args.key, id: args.id),
+        builder: (context) => _i3.MessageView(
+            key: args.key,
+            id: args.id,
+            notificationData: args.notificationData,
+            title: args.title,
+            body: args.body,
+            imageurl: args.imageurl),
         settings: data,
       );
     },
@@ -87,26 +93,48 @@ class MessageViewArguments {
   const MessageViewArguments({
     this.key,
     required this.id,
+    this.notificationData,
+    required this.title,
+    required this.body,
+    required this.imageurl,
   });
 
   final _i4.Key? key;
 
   final String id;
 
+  final List<Map<String, dynamic>>? notificationData;
+
+  final String title;
+
+  final String body;
+
+  final String imageurl;
+
   @override
   String toString() {
-    return '{"key": "$key", "id": "$id"}';
+    return '{"key": "$key", "id": "$id", "notificationData": "$notificationData", "title": "$title", "body": "$body", "imageurl": "$imageurl"}';
   }
 
   @override
   bool operator ==(covariant MessageViewArguments other) {
     if (identical(this, other)) return true;
-    return other.key == key && other.id == id;
+    return other.key == key &&
+        other.id == id &&
+        other.notificationData == notificationData &&
+        other.title == title &&
+        other.body == body &&
+        other.imageurl == imageurl;
   }
 
   @override
   int get hashCode {
-    return key.hashCode ^ id.hashCode;
+    return key.hashCode ^
+        id.hashCode ^
+        notificationData.hashCode ^
+        title.hashCode ^
+        body.hashCode ^
+        imageurl.hashCode;
   }
 }
 
@@ -130,6 +158,10 @@ extension NavigatorStateExtension on _i5.NavigationService {
   Future<dynamic> navigateToMessageView({
     _i4.Key? key,
     required String id,
+    List<Map<String, dynamic>>? notificationData,
+    required String title,
+    required String body,
+    required String imageurl,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -137,7 +169,13 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.messageView,
-        arguments: MessageViewArguments(key: key, id: id),
+        arguments: MessageViewArguments(
+            key: key,
+            id: id,
+            notificationData: notificationData,
+            title: title,
+            body: body,
+            imageurl: imageurl),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -163,6 +201,10 @@ extension NavigatorStateExtension on _i5.NavigationService {
   Future<dynamic> replaceWithMessageView({
     _i4.Key? key,
     required String id,
+    List<Map<String, dynamic>>? notificationData,
+    required String title,
+    required String body,
+    required String imageurl,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -170,7 +212,13 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.messageView,
-        arguments: MessageViewArguments(key: key, id: id),
+        arguments: MessageViewArguments(
+            key: key,
+            id: id,
+            notificationData: notificationData,
+            title: title,
+            body: body,
+            imageurl: imageurl),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

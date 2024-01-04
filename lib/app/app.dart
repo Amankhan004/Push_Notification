@@ -1,4 +1,5 @@
 
+import 'package:push_notification/services/api_client.dart';
 import 'package:push_notification/views/message_view/message_view.dart';
 import 'package:push_notification/views/push_view/push_view.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -12,7 +13,8 @@ import 'package:stacked_services/stacked_services.dart';
 
 dependencies: [
 
-  Singleton(classType: NavigationService)
+  Singleton(classType: NavigationService),
+  Singleton(classType: ApiClient)
 ])
 
 
